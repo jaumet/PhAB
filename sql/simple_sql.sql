@@ -1,0 +1,8 @@
+DROP TABLE IF EXISTS phab
+CREATE TABLE phab (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    ern TEXT NOT NULL UNIQUE,
+    is_active BOOLEAN NOT NULL DEFAULT 0,
+    owner_id INTEGER,
+    lent_to_id INTEGER
+);

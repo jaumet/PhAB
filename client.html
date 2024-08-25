@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>PhAB Client</title>
+
+</head>
+<body>
+    <h2>Activate PhAB</h2>
+    <input type="text" id="ern" placeholder="Enter ERN">
+    <button onclick="activatePhAB()">Activate</button>
+
+    <h2>Deactivate PhAB</h2>
+    <input type="text" id="ernde" placeholder="Enter ERN">
+    <button onclick="deactivatePhAB()">Deactivate</button>
+
+
+    <h2>Lend PhAB</h2>
+    <input type="number" id="phabId" placeholder="PhAB ID">
+    <input type="number" id="friendId" placeholder="Friend ID">
+    <button onclick="lendPhAB()">Lend</button>
+
+    <h2>Return PhAB</h2>
+    <input type="number" id="returnPhabId" placeholder="PhAB ID">
+    <button onclick="returnPhAB()">Return</button>
+    <script>
+
+        function getErnValue() {
+            var ernValue = document.getElementById('ern').value;
+            console.log(ernValue); http://127.0.0.1:5000// This will log the value to the browser's console
+            return ernValue;
+        }
+
+        async function activatePhAB() {
+            const ern = document.getElementById('ern').value;
+            const response = await fetch('http://127.0.0.1:5000/activate', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ ern }),
+                json: {"ern": getErnValue()},
+            
+            });
+            console.log(ern); 
+            const data = await response.json();
+            alert(JSON.stringify(data));
+        }
+
+        async function deactivatePhAB() {
+            const ern = document.getElementById('ernde').value;
+            const response = await fetch('http://127.0.0.1:5000/deactivate', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ ern }),
+                json: {"ern": getErnValue()},
+            
+            });
+            console.log(ern); 
+            const data = await response.json();
+            alert(JSON.stringify(data));
+        }
+
+
+
+
+        async function lendPhAB() {
+            const phabId = document.getElementById('phabId').value;
+            const friendId = document.getElementById('friendId').value;
+            const response = await fetch('http://127.0.0.1:5000/lend', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ phab_id: phabId, friend_id: friendId }),
+            });
+            const data = await response.json();
+            alert(JSON.stringify(data));
+        }
+
+        async function returnPhAB() {
+            const phabId = document.getElementById('returnPhabId').value;
+            const response = await fetch('http://127.0.0.1:5000/return', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ phab_id: phabId }),
+            });
+            const data = await response.json();
+            alert(JSON.stringify(data));
+        }
+
+        document.getElementById('activateBtn').addEventListener('click', function() {
+            fetch('http://0.0.0.0:5000/activate', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    // Your request body content
+                })
+
+            })
+            .then(response => response.text())
+            .then(data => console.log(data))
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+        });
+    </script>
+</body>
+</html>
