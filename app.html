@@ -5,6 +5,10 @@
     <!-- Ensure proper rendering and touch zooming -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PhAB Client</title>
+    <script src="conf/conf.js"></script>
+    <script>
+	  //  console.log(baseUrl); // This should log "http://0.0.0.0:5000" or the correct URL
+    </script>
     <style>
         body {
             margin: 0;
@@ -61,7 +65,7 @@
 
     <script>
         // Define the global variable
-        var baseUrl = "http://0.0.0.0:5000";
+        //var baseUrl = "http://0.0.0.0:5000";
 
         async function activatePhAB() {
             const ern = document.getElementById('ern').value;
